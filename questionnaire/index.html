@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Personality Questionnaire</title>
+  </head>
+  <body>
+    <header></header>
+    <main class="container">
+      <h1>Welcome to the Personality Questionnaire</h1>
+
+      <div>
+        <form class="intake-form">
+          <!-- basic information -->
+          <div class="intake-form-panel-grid">
+            <h2>Basic Info</h2>
+            <fieldset class="simple-input">
+              <label for="firstName">First Name</label>
+              <div>
+                <input type="text" name="firstName" class="basic-details" id="firstName" placeholder="Your first name" required />
+              </div>
+            </fieldset>
+            <fieldset class="simple-input">
+              <label for="lastName">Last Name</label>
+              <div>
+                <input type="text" name="lastName" class="basic-details"  id="lastName" placeholder="Your last name" required />
+              </div>
+            </fieldset>
+            <fieldset class="simple-input">
+              <label for="age">Age</label>
+              <div>
+                <input type="number" name="age" class="basic-details"  id="age" placeholder="Your age" required/>
+              </div>
+            </fieldset>
+          </div>
+          <div class="intake-form-panel">
+            <h2>Adventure and Exploration</h2>
+            <div class="radio-group" id="social-compass">
+              <fieldset class="question">
+                <legend class="radio-question">How do you feel about trying new activities?</legend>
+                <div class="radio-container">
+                  <div class="radio-component radio-input">
+                    <input
+                      data-score="0"
+                      data-category="adventure"
+                      id="new-activities-negative"
+                      name="new-activities"
+                      type="radio"
+                    />
+                    <label for="new-activities-negative">I prefer sticking to what I know and like.</label>
+                  </div>
+                  <div class="radio-component radio-input">
+                    <input
+                      data-score="1"
+                      data-category="adventure"
+                      id="new-activities-mild"
+                      name="new-activities"
+                      type="radio"
+                      checked
+                    />
+                    <label for="new-activities-mild"
+                      >I'm open to new experiences but often stick to my comfort zone.</label
+                    >
+                  </div>
+                  <div class="radio-component radio-input">
+                    <input
+                      data-score="2"
+                      data-category="adventure"
+                      id="new-activities-positive"
+                      name="new-activities"
+                      type="radio"
+                    />
+                    <label for="new-activities-positive"
+                      >I love diving into new activities and rarely say no to trying something
+                      different.</label
+                    >
+                  </div>
+                </div>
+              </fieldset>
+
+              <fieldset class="question">
+                <legend class="radio-question">What’s your approach to travel?</legend>
+                <div class="radio-container">
+                  <div class="radio-component radio-input">
+                    <input
+                      data-score="0"
+                      data-category="adventure"
+                      id="travel-negative"
+                      name="travel"
+                      type="radio"
+                    />
+                    <label for="travel-negative">Traveling stresses me out; I prefer to stay home.</label>
+                  </div>
+                  <div class="radio-component radio-input">
+                    <input
+                      data-score="1"
+                      data-category="adventure"
+                      id="travel-mild"
+                      name="travel"
+                      type="radio"
+                      checked
+                    />
+                    <label for="travel-mild"
+                      >I enjoy travel occasionally, as long as it's not too far or exotic.</label
+                    >
+                  </div>
+                  <div class="radio-component radio-input">
+                    <input
+                      data-score="2"
+                      data-category="adventure"
+                      id="travel-positive"
+                      name="travel"
+                      type="radio"
+                    />
+                    <label for="travel-positive"
+                      >I'm always ready for the next adventure, whether it's near or far.</label
+                    >
+                  </div>
+                </div>
+              </fieldset>
+
+              <fieldset class="question">
+                <legend class="radio-question">How do you react to unexpected changes in plans?</legend>
+                <div class="radio-container">
+                  <div class="radio-component radio-input">
+                    <input
+                      data-score="0"
+                      data-category="adventure"
+                      id="change-plans-negative"
+                      name="change-plans"
+                      type="radio"
+                    />
+                    <label for="change-plans-negative"
+                      >I get frustrated and upset; I like things to go as planned.</label
+                    >
+                  </div>
+                  <div class="radio-component radio-input">
+                    <input
+                      data-score="1"
+                      data-category="adventure"
+                      id="change-plans-mild"
+                      name="change-plans"
+                      type="radio"
+                      checked
+                    />
+                    <label for="change-plans-mild"
+                      >I'm adaptable but find sudden changes a bit unsettling.</label
+                    >
+                  </div>
+                  <div class="radio-component radio-input">
+                    <input
+                      data-score="2"
+                      data-category="adventure"
+                      id="change-plans-positive"
+                      name="change-plans"
+                      type="radio"
+                    />
+                    <label for="change-plans-positive"
+                      >I find unexpected changes exciting and see them as opportunities for adventure.</label
+                    >
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+          <button class="submit-button" type="submit">Submit</button>
+        </form>
+
+        <div class="results">
+          <div>
+            <h3>Results</h3>
+            <p class="user-data"></p>
+          </div>
+          <div class="results-list"></div>
+      </div>
+    </main>
+    <script src="./index.js" defer></script>
+  </body>
+</html>
