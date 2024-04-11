@@ -1,9 +1,14 @@
+// Constants
 const form = document.querySelector('form');
+const inputs = document.querySelectorAll('input[type="radio"]:checked');
+const basicDetailInputs = document.querySelectorAll('.basic-details');
+
+const resultsContainer = document.querySelector('.results');
+const resultsList = document.querySelector('.results-list');
+const userDataParagraph = document.querySelector('.user-data');
 
 form.addEventListener('submit', (e) => {
   e.preventDefault();
-  const basicDetailInputs = document.querySelectorAll('.basic-details');
-  const inputs = document.querySelectorAll('input[type="radio"]:checked');
 
   const userData = getBasicDetails(basicDetailInputs);
   const categoryScores = generateCategoryScores(inputs);
@@ -30,9 +35,6 @@ function generateCategoryScores(inputs) {
 }
 
 function showResults(categoryScores) {
-  const resultsContainer = document.querySelector('.results');
-  const resultsList = document.querySelector('.results-list');
-
   resultsList.innerHTML = '';
 
   for (const category in categoryScores) {
@@ -48,7 +50,6 @@ function showResults(categoryScores) {
 }
 
 function showUserData(userData) {
-  const userDataParagraph = document.querySelector('.user-data');
   userDataParagraph.textContent = `You are ${userData.firstName} ${userData.lastName}, ${userData.age} years old. Let's have a look at your results 😊`;
 }
 
