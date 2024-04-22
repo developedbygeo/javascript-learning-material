@@ -28,7 +28,7 @@ html {
 
 body {
   display: flex;
-  height: 100dvh;
+  height: 100vh;
   align-items: center;
   justify-content: center;
   background-color: var(--main-bg-color);
@@ -36,10 +36,10 @@ body {
 
 .container {
   position: relative;
-  min-width: 30rem;
-  min-height: 40rem;
-  padding: 4rem 3rem 3rem;
-  border-radius: 2rem;
+  min-width: 300px;
+  min-height: 400px;
+  padding: 40px 30px 30px;
+  border-radius: 20px;
   box-shadow: 25px 25px 75px rgba(0, 0, 0, 0.25), 10px 10px 70px rgba(0, 0, 0, 0.25),
     inset -5px -5px 15px rgba(0, 0, 0, 0.25), inset 5px 5px 15px rgba(0, 0, 0, 0.25);
 }
@@ -47,15 +47,15 @@ body {
 .calculator {
   position: relative;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
   gap: 2.25rem;
+  grid-template-columns: repeat(4, 1fr);
 
   & .num {
+    color: var(--text-white);
     position: relative;
     display: grid;
-    place-items: center;
-    color: var(--text-white);
     width: 8rem;
+    place-items: center;
     height: 8rem;
     background: linear-gradient(180deg, #2f2f2f, #3f3f3f);
     box-shadow: inset -8px 0 8px rgba(0, 0, 0, 0.15), inset 0 -8px 8px rgba(0, 0, 0, 0.25),
@@ -63,7 +63,7 @@ body {
     user-select: none;
     cursor: pointer;
     font-weight: 400;
-    border-radius: 1rem;
+    border-radius: 10px;
 
     &::before {
       content: '';
@@ -72,7 +72,7 @@ body {
       left: 4px;
       bottom: 14px;
       right: 12px;
-      border-radius: 1rem;
+      border-radius: 10px;
       background: linear-gradient(90deg, #2d2d2d, #4d4d4d);
       box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.1), 10px 5px 10px rgba(0, 0, 0, 0.15);
       border-left: 1px solid #0004;
@@ -92,8 +92,8 @@ body {
 
   & .clear {
     width: 100%;
-    background: var(--bg-red);
     grid-column: span 2;
+    background: var(--bg-red);
 
     &::before {
       background: linear-gradient(90deg, #d20000, #ffffff5c);
@@ -104,8 +104,8 @@ body {
   }
 
   & .plus {
-    grid-row: span 2;
     height: 100%;
+    grid-row: span 2;
   }
 
   & .equal {
