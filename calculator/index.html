@@ -3,16 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./style.css " />
+    <link rel="stylesheet" href="./style.css" />
     <title>Calculator</title>
   </head>
   <body>
     <main class="container">
       <div class="calculator">
         <div class="output">
-          <div data-first-operand class="current-operand"></div>
+          <div data-first-operand class="first-operand"></div>
           <div data-operator class="operator"></div>
-          <div data-second-operand class="previous-operand"></div>
+          <div data-second-operand class="second-operand"></div>
         </div>
         <button data-clear class="num clear"><i>C</i></button>
         <button data-operation class="num small-operand"><i>/</i></button>
@@ -31,9 +31,10 @@
         <button data-operation class="num"><i>+/-</i></button>
         <button data-number class="num"><i>0</i></button>
         <button data-number class="num small-operand"><i>.</i></button>
-        <button data-equals class="num equal"><i>=</i></button>
+        <button data-equal class="num equal"><i>=</i></button>
       </div>
     </main>
+
     <script src="./index.js" defer></script>
   </body>
 </html>

@@ -1,7 +1,7 @@
-// constans
+// constants
 const numberButtons = document.querySelectorAll('[data-number]');
 const operationButtons = document.querySelectorAll('[data-operation]');
-const equalsButton = document.querySelector('[data-equals]');
+const equalsButton = document.querySelector('[data-equal]');
 const clearButton = document.querySelector('[data-clear]');
 
 const outputFirstOperand = document.querySelector('[data-first-operand]');
@@ -20,89 +20,128 @@ const operations = {
   '/': (a, b) => a / b,
 };
 
-numberButtons.forEach((button) => {
-  button.addEventListener('click', () => {
-    calculator(button.innerText);
-  });
-});
-
-operationButtons.forEach((button) => {
-  button.addEventListener('click', () => {
-    if (firstOperand === '') return;
-    shouldExpectSecondOperand = true;
-    operator = button.innerText;
-    calculator(button.innerText);
-  });
-});
-
 // event listeners
-equalsButton.addEventListener('click', () => {
-  const result = calculate(operator);
-  firstOperand = result;
-  secondOperand = '';
-  operator = '';
-  shouldExpectSecondOperand = false;
 
-  outputFirstOperand.innerText = firstOperand;
-  outputSecondOperand.innerText = secondOperand;
-  outputOperator.innerText = operator;
+numberButtons.forEach((numberButton) => {
+  numberButton.addEventListener('click', () => {
+    calculator(numberButton.innerText);
+  });
 });
 
-clearButton.addEventListener('click', () => {
-  firstOperand = '';
-  secondOperand = '';
-  operator = '';
-  shouldExpectSecondOperand = false;
-
-  outputFirstOperand.innerText = firstOperand;
-  outputSecondOperand.innerText = secondOperand;
-  outputOperator.innerText = operator;
+operationButtons.forEach((operationButton) => {
+  operationButton.addEventListener('click', () => {
+    handleOperationButtonClick(operationButton.innerText);
+  });
 });
 
-// helpers
-const calculate = (operator) => {
-  const a = parseFloat(firstOperand);
-  const b = parseFloat(secondOperand);
-  return operations[operator](a, b);
-};
+clearButton.addEventListener('click', handleClearButtonClick);
 
-const calculator = (input) => {
+equalsButton.addEventListener('click', handleEqualButtonClick);
+
+function handleEqualButtonClick() {
+  const result = calculate();
+
+  setGlobalVariables({
+    newFirstOperand: result,
+    newOperator: '',
+    newSecondOperand: '',
+    newShouldExpectSecondOperand: false,
+  });
+
+  updateDisplayText();
+}
+
+function handleOperationButtonClick(incomingOperator) {
+  const isFirstOperandEmpty = isEmptyString(firstOperand);
+  const isOperatorEmpty = isEmptyString(operator);
+
+  if (isFirstOperandEmpty || !isOperatorEmpty) return;
+
+  shouldExpectSecondOperand = true;
+  operator = incomingOperator;
+
+  updateDisplayText();
+}
+
+function calculate() {
+  const parsedFirstOperand = Number(firstOperand);
+  const parsedSecondOperand = Number(secondOperand);
+
+  return operations[operator](parsedFirstOperand, parsedSecondOperand);
+}
+
+function calculator(input) {
   const isStringNumber = isStringAnActualNumber(input);
   const isDecimal = isStringADecimal(input);
 
   if (isDecimal) return handleDecimal();
-  if (!isStringNumber) return;
 
   if (!shouldExpectSecondOperand) {
-    if (firstOperand === '') {
-      firstOperand = input;
-    } else {
-      firstOperand += input;
-    }
-  } else if (isStringNumber && shouldExpectSecondOperand) {
-    if (secondOperand === '') {
-      secondOperand = input;
-    } else {
-      secondOperand += input;
-    }
+    const isFirstOperandEmpty = isEmptyString(firstOperand);
+    firstOperand = isFirstOperandEmpty ? input : (firstOperand += input);
+  } else {
+    const isSecondOperandEmpty = isEmptyString(secondOperand);
+    secondOperand = isSecondOperandEmpty ? input : (secondOperand += input);
   }
 
+  updateDisplayText();
+}
+
+// handlers;
+
+function handleDecimal() {
+  if (shouldExpectSecondOperand) {
+    secondOperand.includes('.') ? secondOperand : (secondOperand += '.');
+  } else {
+    firstOperand.includes('.') ? firstOperand : (firstOperand += '.');
+  }
+}
+
+// kanoume reset ta global values kai ta outputs sto html
+function handleClearButtonClick() {
+  setGlobalVariables({
+    newFirstOperand: '',
+    newOperator: '',
+    newSecondOperand: '',
+    newShouldExpectSecondOperand: false,
+  });
+
+  updateDisplayText();
+}
+
+// helpers;
+
+// checkaroume an to string einai number
+function isStringAnActualNumber(str) {
+  return !isNaN(Number(str));
+}
+
+// checkaroume an to string einai decimal
+function isStringADecimal(str) {
+  return str === '.';
+}
+
+// checkaroume an to string einai empty
+function isEmptyString(str) {
+  return str === '';
+}
+
+// updatearoume to html text
+function updateDisplayText() {
   outputFirstOperand.innerText = firstOperand;
   outputOperator.innerText = operator;
   outputSecondOperand.innerText = secondOperand;
-};
+}
 
-// handlers
-const handleDecimal = () => {
-  if (shouldExpectSecondOperand) {
-    if (secondOperand.includes('.')) return;
-    secondOperand += '.';
-  } else {
-    if (firstOperand.includes('.')) return;
-    firstOperand += '.';
-  }
-};
-
-// helpers
-const isStringAnActualNumber = (str) => !isNaN(Number(str));
-const isStringADecimal = (str) => str === '.';
+// setaroume ta global variables me ta nea values. To pername san object gia na min xreiastei na kanoume update ola ta values xexorista
+function setGlobalVariables({
+  newFirstOperand,
+  newOperator,
+  newSecondOperand,
+  newShouldExpectSecondOperand,
+}) {
+  firstOperand = newFirstOperand;
+  operator = newOperator;
+  secondOperand = newSecondOperand;
+  shouldExpectSecondOperand = newShouldExpectSecondOperand;
+}
